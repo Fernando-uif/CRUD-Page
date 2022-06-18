@@ -1,0 +1,13 @@
+@import "../../sass/abstract/variables.scss";
+
+@mixin inputText {
+  border: 0.2rem solid $primary-color;
+   width: 96%;
+  display: block;
+  margin: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 1.6rem;
+text-transform: capitalize;
+}

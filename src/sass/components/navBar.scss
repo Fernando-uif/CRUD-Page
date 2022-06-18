@@ -1,5 +1,40 @@
 @import "../../sass/abstract/variables.scss";
 
 .navBar {
-  background-color: $primary-color;
+  color: #fff;
+  padding: 1rem;
+  font-size: 2rem;
+  background-color: lighten($tertiary-color,15);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-bottom: 1.5rem;
+  &__elements {
+    display: flex;
+    justify-content: space-around;
+    color: $secondary-color;
+    position: relative;
+  }
+  &__elements a {
+    text-decoration: none;
+    color: $secondary-color;
+  }
+  &__element {
+    position: relative;
+  }
+  &__element::after {
+    content: "";
+    position: absolute;
+    width: 0rem;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom: 0.2rem solid $secondary-color;
+    left: 0;
+    height: .01rem;
+    transform-origin: center;
+    transition: width 0.4s ease;
+    top: 100%;
+  }
+  &__element:hover::after {
+    width: 100%;
+  }
 }

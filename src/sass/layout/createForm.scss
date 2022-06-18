@@ -1,0 +1,46 @@
+@import "../abstract/variables.scss";
+@import "../abstract/mixins.scss";
+
+.createCard {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding:1.5rem;
+  margin-bottom: 5rem;
+  background-color: lighten($tertiary-color,15);
+  &__form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 6rem);
+    grid-gap: 1rem;
+    text-transform: capitalize;
+  }
+  &__input {
+    @include inputText;
+    &:focus {
+      outline: none;
+    }
+  }
+  &__form label{
+    font-size:1.3em;
+  }
+  &__sendButton{
+    text-align: center;
+  }
+  &__sendButton span{
+    padding:.8rem 8rem;
+    background-color: lighten($tertiary-color,15);
+    font-size:1.5rem;
+    color:$secondary-color;
+    display:inline-block; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    transition:transform .5s, background-color .5s ease;
+    &:active{
+      transform:scale(.9);
+    }
+    &:hover{
+      background-color: lighten($tertiary-color, 10);
+    }
+  }
+
+  
+}
