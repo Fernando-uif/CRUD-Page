@@ -1,0 +1,43 @@
+@import "../abstract/generalMixin.scss";
+@import '../abstract/variables.scss';
+.readCard {
+  @include card(1.5rem);
+
+  & h1 {
+    text-transform: uppercase;
+  }
+
+  &__secondCard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    & * h2 {
+      text-align: center;
+      text-transform: capitalize;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__search {
+    grid-gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &__input {
+    @include inputText;
+  }
+  &__table {
+    background-color: #ededed;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    & th,
+    td {
+      font-size: 1.5rem;
+      text-transform: capitalize;
+      padding: 1rem;
+    }
+    & tr:nth-child(even){
+        background-color: $tertiary-color;
+    }
+  }
+}

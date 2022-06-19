@@ -27,7 +27,7 @@
     border-top:none;
     border-left:none;
     border-right:none;
-    border-bottom: 0.2rem solid $secondary-color;
+    border-bottom: 0.2rem solid darken($tertiary-color,10);
     left: 0;
     height: .01rem;
     transform-origin: center;

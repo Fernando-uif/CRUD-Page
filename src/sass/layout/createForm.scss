@@ -1,11 +1,11 @@
 @import "../abstract/variables.scss";
-@import "../abstract/mixins.scss";
+@import "../abstract/generalMixin.scss";
 
 .createCard {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding:1.5rem;
-  margin-bottom: 5rem;
-  background-color: lighten($tertiary-color,15);
+  &  h1 {
+    text-transform: uppercase;
+  }
+  @include card(1.5rem);
   &__form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

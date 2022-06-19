@@ -1,0 +1,27 @@
+@import "../abstract/variables.scss";
+
+@mixin inputText {
+  border: 0.2rem solid $tertiary-color;
+  width: 96%;
+  display: block;
+  margin: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 1.6rem;
+  text-transform: capitalize;
+  &:focus{
+    outline: none;
+  }
+}
+
+@mixin card($padding:1.5rem) {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: $padding;
+  margin-bottom: 5rem;
+  background-color: lighten($tertiary-color, 15);
+}
+
+@mixin labelInputs {
+ font-size:1.3rem; 
+}

@@ -1,42 +1,42 @@
 import React from "react";
 import "../../sass/layout/createForm.scss";
-import "../../sass/components/buttons.scss";
 export const CreateScreen = () => {
   return (
     <>
       <section className="createCard">
+        <h1>create</h1>
         <form action="" className="createCard__form">
           <div>
-            <label htmlFor="nombre">nombre</label>
-            <input className="createCard__input" id="nombre" type="text" />
+            <label htmlFor="nombre">name</label>
+            <input className="createCard__input" autoComplete="off"  id="nombre" type="text" />
           </div>
           <div>
             <label htmlFor="lastName">last name</label>
-            <input className="createCard__input" id="lastName" type="text" />
+            <input className="createCard__input" autoComplete="off" id="lastName" type="text" />
           </div>
           <div>
             <label htmlFor="email">email</label>
-            <input className="createCard__input" id="email" type="text" />
+            <input className="createCard__input" autoComplete="off" id="email" type="text" />
           </div>
           <div>
             <label htmlFor="password">password</label>
             <input
-              className="createCard__input"
+              className="createCard__input" autoComplete="off"
               id="password"
               type="password"
             />
           </div>
           <div>
             <label htmlFor="phone">phone</label>
-            <input className="createCard__input" id="phone" type="text" />
+            <input className="createCard__input" autoComplete="off" id="phone" type="text" />
           </div>
           <div>
             <label htmlFor="addres">address</label>
-            <input className="createCard__input" id="addres" type="text" />
+            <input className="createCard__input" autoComplete="off" id="addres" type="text" />
           </div>
           <div>
             <label htmlFor="date">birthday</label>
-            <input className="createCard__input" id="date" type="date" />
+            <input className="createCard__input" autoComplete="off" id="date" type="date" />
           </div>
           <div>
             <label htmlFor="genre">genre</label>
