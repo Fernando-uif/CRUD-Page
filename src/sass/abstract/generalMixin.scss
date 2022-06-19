@@ -10,12 +10,12 @@
   border-right: none;
   font-size: 1.6rem;
   text-transform: capitalize;
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
 
-@mixin card($padding:1.5rem) {
+@mixin card($padding: 1.5rem) {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: $padding;
   margin-bottom: 5rem;
@@ -23,5 +23,22 @@
 }
 
 @mixin labelInputs {
- font-size:1.3rem; 
+  font-size: 1.3rem;
+}
+
+@mixin button {
+  padding: 0.8rem 8rem;
+  background-color: lighten($tertiary-color, 15);
+  font-size: 1.5rem;
+  color: $secondary-color;
+  display: inline-block;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+  transition: transform 0.5s, background-color 0.5s ease;
+  &:active {
+    transform: scale(0.9);
+  }
+  &:hover {
+    background-color: lighten($tertiary-color, 10);
+  }
 }

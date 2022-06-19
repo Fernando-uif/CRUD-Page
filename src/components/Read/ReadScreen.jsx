@@ -47,9 +47,8 @@ export const ReadScreen = () => {
                 type="phone"
               />
             </div>
-
-            <div className="createCard__sendButton">
-              <span>Send</span>
+            <div className="readCard__sendButton">
+              <span>request</span>
             </div>
           </div>
         </div>
