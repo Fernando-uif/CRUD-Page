@@ -53,7 +53,7 @@ export const ReadScreen = () => {
           </div>
         </div>
         <div className="readCard__results">
-          <Results />
+          <Results kindOfRequest='read' />
         </div>
       </section>
     </div>
