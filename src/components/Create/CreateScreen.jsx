@@ -1,49 +1,131 @@
-import React from "react";
+import { useState } from "react";
+import { justNumbers } from "../../helpers/justNumbers";
+import { useForm } from "../../hooks/useForm";
 import "../../sass/layout/createForm.scss";
+
 export const CreateScreen = () => {
+  const [values, handleInputChange] = useForm({
+    name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
+    birthday: "",
+    genre: "",
+  });
+
+  const handleSubmit = () => {
+    
+  };
+
   return (
     <>
       <section className="createCard">
         <h1>create</h1>
-        <form action="" className="createCard__form">
+        <form onSubmit={handleSubmit} className="createCard__form">
           <div>
-            <label htmlFor="nombre">name</label>
-            <input className="createCard__input" autoComplete="off"  id="nombre" type="text" />
+            <label htmlFor="name">name</label>
+            <input
+              autoComplete="off"
+              className="createCard__input"
+              id="name"
+              name="name"
+              onChange={handleInputChange}
+              required
+              type="text"
+              value={values.name}
+            />
           </div>
           <div>
             <label htmlFor="lastName">last name</label>
-            <input className="createCard__input" autoComplete="off" id="lastName" type="text" />
+            <input
+              autoComplete="off"
+              className="createCard__input"
+              id="lastName"
+              name="last_name"
+              onChange={handleInputChange}
+              value={values.last_name}
+            />
           </div>
           <div>
             <label htmlFor="email">email</label>
-            <input className="createCard__input" autoComplete="off" id="email" type="text" />
+            <input
+              autoComplete="off"
+              className="createCard__input"
+              id="email"
+              name="email"
+              onChange={handleInputChange}
+              required
+              type="text"
+              value={values.email}
+            />
           </div>
           <div>
             <label htmlFor="password">password</label>
             <input
-              className="createCard__input" autoComplete="off"
+              autoComplete="off"
+              className="createCard__input"
               id="password"
+              name="password"
+              onChange={handleInputChange}
+              required
               type="password"
+              value={values.password}
             />
           </div>
           <div>
             <label htmlFor="phone">phone</label>
-            <input className="createCard__input" autoComplete="off" id="phone" type="text" />
+            <input
+              autoComplete="off"
+              className="createCard__input"
+              id="phone"
+              maxLength="10"
+              name="phone"
+              onChange={handleInputChange}
+              onKeyPress={justNumbers}
+              required
+              type="tel"
+              value={values.phone}
+            />
           </div>
           <div>
             <label htmlFor="addres">address</label>
-            <input className="createCard__input" autoComplete="off" id="addres" type="text" />
+            <input
+              name="address"
+              onChange={handleInputChange}
+              className="createCard__input"
+              autoComplete="off"
+              value={values.address}
+              id="addres"
+              type="text"
+            />
           </div>
           <div>
             <label htmlFor="date">birthday</label>
-            <input className="createCard__input" autoComplete="off" id="date" type="date" />
+            <input
+              onChange={handleInputChange}
+              name="birthday"
+              value={values.birthday}
+              className="createCard__input"
+              autoComplete="off"
+              id="date"
+              type="date"
+            />
           </div>
           <div>
             <label htmlFor="genre">genre</label>
-            <select name="genre" id="genre" className="createCard__input">
-              <option value="" disabled selected>
+            <select
+              className="createCard__input"
+              id="genre"
+              name="genre"
+              onChange={handleInputChange}
+              required
+              value={values.genre}
+            >
+              <option value="" disabled>
                 Select your option
-              </option>{" "}
+              </option>
               <option value="male">Male</option>
               <option value="female">female</option>
             </select>
@@ -51,7 +133,7 @@ export const CreateScreen = () => {
         </form>
       </section>
       <div className="createCard__sendButton">
-        <span>Send</span>
+        <span onSubmit={handleSubmit}>Send</span>
       </div>
     </>
   );
