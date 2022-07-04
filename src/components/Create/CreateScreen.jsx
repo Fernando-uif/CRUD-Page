@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
 
 import { justNumbers } from "../../helpers/justNumbers";
 import { useForm } from "../../hooks/useForm";
 import "../../sass/layout/createForm.scss";
 import { emailChecker } from "../../helpers/reviewEmail";
+import { createUser } from "../../reducers/userReducer";
 
 export const CreateScreen = () => {
+  const dispatch = useDispatch();
   const [values, handleInputChange, handleInputReset] = useForm({
-    name: "",
+    user_name: "",
     last_name: "",
     email: "",
     password: "",
@@ -19,17 +22,36 @@ export const CreateScreen = () => {
   });
 
   const handleSubmit = () => {
-    const { name, email, password, phone } = values;
-    if (name === "" || email === "" || password === "" || phone === "") {
+    const { user_name, email, password, phone } = values;
+    if (user_name === "" || email === "" || password === "" || phone === "") {
       Swal.fire({
         title: "Error",
         text: "Todos los campos son obligatorios",
         icon: "error",
         confirmButtonText: "Ok",
         confirmButtonColor: "#726D84",
-
       });
       return;
+    }
+    try {
+      
+      dispatch(createUser(values));
+      Swal.fire({
+        title: "User created",
+        text: "User created successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#726D84",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: `Error creating user`,
+        icon: "error",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#726D84",
+      });
+      throw new Error(error);
     }
     //TODO Hacer peticion fetch para crear usuario
   };
@@ -57,10 +79,10 @@ export const CreateScreen = () => {
               autoComplete="off"
               className="createCard__input"
               id="name"
-              name="name"
+              name="user_name"
               onChange={handleInputChange}
               type="text"
-              value={values.name}
+              value={values.user_name}
             />
           </div>
           <div>
@@ -161,4 +183,3 @@ export const CreateScreen = () => {
     </>
   );
 };
-
