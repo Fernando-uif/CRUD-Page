@@ -1,8 +1,8 @@
-import React from "react";
 import "../../sass/layout/update.scss";
 import { Results } from "../Read/Results";
 
 export const UpdateScreen = () => {
+
   return (
     <div className="updateCard">
       <h1>update</h1>
@@ -47,13 +47,13 @@ export const UpdateScreen = () => {
                 type="phone"
               />
             </div>
-            <div className="updateCard__sendButton">
+            <div  className="updateCard__sendButton">
               <span>request</span>
             </div>
           </div>
         </div>
         <div className="updateCard__results">
-          <Results kindOfRequest = 'update'/>
+          <Results kindOfRequest="update" />
         </div>
       </section>
     </div>

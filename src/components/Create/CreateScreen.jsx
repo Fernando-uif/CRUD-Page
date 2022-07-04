@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
@@ -6,11 +5,11 @@ import { justNumbers } from "../../helpers/justNumbers";
 import { useForm } from "../../hooks/useForm";
 import "../../sass/layout/createForm.scss";
 import { emailChecker } from "../../helpers/reviewEmail";
-import { createUser } from "../../reducers/userReducer";
+import { createUser } from "../../reducers/thunks";
 
 export const CreateScreen = () => {
   const dispatch = useDispatch();
-  const [values, handleInputChange, handleInputReset] = useForm({
+  const [values, handleInputChange, handleInputReset, reset] = useForm({
     user_name: "",
     last_name: "",
     email: "",
@@ -34,7 +33,6 @@ export const CreateScreen = () => {
       return;
     }
     try {
-      
       dispatch(createUser(values));
       Swal.fire({
         title: "User created",
@@ -43,6 +41,7 @@ export const CreateScreen = () => {
         confirmButtonText: "Ok",
         confirmButtonColor: "#726D84",
       });
+      reset();
     } catch (error) {
       Swal.fire({
         title: "Error",
@@ -53,10 +52,9 @@ export const CreateScreen = () => {
       });
       throw new Error(error);
     }
-    //TODO Hacer peticion fetch para crear usuario
   };
 
-  const correoExiste = (e) => {
+  const reviewEmail = (e) => {
     !emailChecker.test(e.target.value)
       ? Swal.fire({
           title: "Invalid email",
@@ -105,7 +103,7 @@ export const CreateScreen = () => {
               name="email"
               onChange={handleInputChange}
               type="text"
-              onBlur={correoExiste}
+              onBlur={reviewEmail}
               value={values.email}
             />
           </div>
