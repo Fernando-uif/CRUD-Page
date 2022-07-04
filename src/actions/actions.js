@@ -1,0 +1,6 @@
+export const ACTIONS = {
+    ADD_USER: 'ADD_USER',
+    READ_USER: 'READ_USER',
+    UPDATE_USER: 'UPDATE_USER',
+    DELETE_USER: 'DELETE_USER',
+}
