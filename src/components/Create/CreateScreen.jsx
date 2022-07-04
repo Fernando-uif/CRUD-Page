@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+
 import { justNumbers } from "../../helpers/justNumbers";
 import { useForm } from "../../hooks/useForm";
 import "../../sass/layout/createForm.scss";
+import { emailChecker } from "../../helpers/reviewEmail";
 
 export const CreateScreen = () => {
-  const [values, handleInputChange] = useForm({
+  const [values, handleInputChange, handleInputReset] = useForm({
     name: "",
     last_name: "",
     email: "",
@@ -16,14 +19,38 @@ export const CreateScreen = () => {
   });
 
   const handleSubmit = () => {
-    
+    const { name, email, password, phone } = values;
+    if (name === "" || email === "" || password === "" || phone === "") {
+      Swal.fire({
+        title: "Error",
+        text: "Todos los campos son obligatorios",
+        icon: "error",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#726D84",
+
+      });
+      return;
+    }
+    //TODO Hacer peticion fetch para crear usuario
+  };
+
+  const correoExiste = (e) => {
+    !emailChecker.test(e.target.value)
+      ? Swal.fire({
+          title: "Invalid email",
+          text: "Please, enter a valid email",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#726D84",
+        }) && handleInputReset({ name: "email" })
+      : null;
   };
 
   return (
     <>
       <section className="createCard">
         <h1>create</h1>
-        <form onSubmit={handleSubmit} className="createCard__form">
+        <form className="createCard__form">
           <div>
             <label htmlFor="name">name</label>
             <input
@@ -56,6 +83,7 @@ export const CreateScreen = () => {
               name="email"
               onChange={handleInputChange}
               type="text"
+              onBlur={correoExiste}
               value={values.email}
             />
           </div>
@@ -128,10 +156,9 @@ export const CreateScreen = () => {
         </form>
       </section>
       <div className="createCard__sendButton">
-        <span onSubmit={handleSubmit}>Send</span>
+        <span onClick={handleSubmit}>Send</span>
       </div>
     </>
   );
 };
 
-// usuarios usuarioid, nombre apellido, email, password, telefono, direccion, fecha de nacimiento, genero.

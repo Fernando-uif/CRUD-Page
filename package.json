@@ -14,7 +14,8 @@
     "react-dom": "^17.0.2",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "sweetalert2": "^11.4.19"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
