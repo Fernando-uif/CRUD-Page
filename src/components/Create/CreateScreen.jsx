@@ -32,7 +32,6 @@ export const CreateScreen = () => {
               id="name"
               name="name"
               onChange={handleInputChange}
-              required
               type="text"
               value={values.name}
             />
@@ -56,7 +55,6 @@ export const CreateScreen = () => {
               id="email"
               name="email"
               onChange={handleInputChange}
-              required
               type="text"
               value={values.email}
             />
@@ -69,7 +67,6 @@ export const CreateScreen = () => {
               id="password"
               name="password"
               onChange={handleInputChange}
-              required
               type="password"
               value={values.password}
             />
@@ -84,7 +81,6 @@ export const CreateScreen = () => {
               name="phone"
               onChange={handleInputChange}
               onKeyPress={justNumbers}
-              required
               type="tel"
               value={values.phone}
             />
@@ -120,7 +116,6 @@ export const CreateScreen = () => {
               id="genre"
               name="genre"
               onChange={handleInputChange}
-              required
               value={values.genre}
             >
               <option value="" disabled>
