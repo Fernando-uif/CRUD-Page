@@ -1,6 +1,5 @@
 import { useForm } from "../hooks/useForm";
 import "../sass/components/modal.scss";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../reducers/thunks";
 import Swal from "sweetalert2";
@@ -11,7 +10,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
     user: { user },
   } = useSelector((state) => state);
 
-  const [values, handleInputChange, handleInputReset, reset] = useForm({
+  const [values, handleInputChange, , reset] = useForm({
     user_name: "",
     email: "",
     phone: "",
@@ -42,7 +41,6 @@ export const Modal = ({ title, modalState, setModalState }) => {
           })
         );
   };
-  //TODO Revisar si alguno viene vacio para tomar el que ya existe, porque si no lo manda como string vacio
 
   const setModalFalse = () => {
     setModalState(false);
