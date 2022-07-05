@@ -2,6 +2,7 @@ import { ACTIONS } from "../actions/actions";
 
 const initialState = {
   users: [],
+  user:[]
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -13,7 +14,10 @@ export const userReducer = (state = initialState, action) => {
         users: action.payload,
       };
     case ACTIONS.UPDATE_USER:
-      return {};
+      return {
+        ...state,
+        user: action.payload
+      };
     case ACTIONS.DELETE_USER:
       return {};
     default:

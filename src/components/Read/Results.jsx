@@ -1,13 +1,18 @@
 import React, { useState } from "react";
+import { ACTIONS } from "../../actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 import "../../sass/layout/readResults.scss";
 import { Modal } from "../Modal";
 
 export const Results = ({ kindOfRequest, users }) => {
+  console.log(users,'Users de results');
+  
   const [modalState, setModalState] = useState(false);
-  const [user, setuser] = useState([]);
+  const dispatch = useDispatch();
+
   const handleEdit = (e, user) => {
     setModalState(true);
-    setuser(user);
+    dispatch({type:ACTIONS.UPDATE_USER,payload:user});
   };
   
   return (
@@ -16,7 +21,6 @@ export const Results = ({ kindOfRequest, users }) => {
           title={"Edit"}
           modalState={modalState}
           setModalState={setModalState}
-          user={user}
         />
       <table className={`${kindOfRequest}Card__table`}>
         <tbody>
