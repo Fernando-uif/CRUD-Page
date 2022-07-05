@@ -13,7 +13,7 @@ export const UpdateScreen = () => {
   const {
     user: { users },
   } = useSelector((state) => state);
-  
+
   const [values, handleInputChange, handleInputReset, reset] = useForm({
     user_id: "",
     user_name: "",
