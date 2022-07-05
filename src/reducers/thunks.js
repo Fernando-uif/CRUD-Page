@@ -23,6 +23,16 @@ const updateUser = (userInfo = {}) => {
     });
   };
 };
+const deleteUser = (userInfo = {}) => {
+  return async () => {
+    await fetch(`http://localhost:8000/api/usuarios/${userInfo.user_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+};
 
 const readUsers = () => {
   return async (dispatch) => {
@@ -56,4 +66,4 @@ const readUser = (userInfo = {}) => {
   };
 };
 
-export { createUser, updateUser, readUser, readUsers };
+export { createUser, updateUser, readUser, readUsers, deleteUser };
