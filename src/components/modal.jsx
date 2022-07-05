@@ -20,6 +20,13 @@ export const Modal = ({ title, modalState, setModalState }) => {
   const { user_name, email, phone, last_name } = values;
 
   const handleSaveUser = () => {
+    let obj = {};
+    for (let i in values) {
+      if (values[i] !== "") {
+        obj = { ...obj, [i]: values[i] };
+      }
+    }
+
     user_name === "" && email === "" && phone === "" && last_name === ""
       ? Swal.fire({
           title: "Error",
@@ -28,9 +35,14 @@ export const Modal = ({ title, modalState, setModalState }) => {
           confirmButtonText: "Ok",
           confirmButtonColor: "#726D84",
         })
-      : dispatch(updateUser({ ...values }));
+      : dispatch(
+          updateUser({
+            ...user,
+            ...obj,
+          })
+        );
   };
-
+  //TODO Revisar si alguno viene vacio para tomar el que ya existe, porque si no lo manda como string vacio
 
   const setModalFalse = () => {
     setModalState(false);
@@ -80,6 +92,8 @@ export const Modal = ({ title, modalState, setModalState }) => {
                   type="text"
                   name="last_name"
                   id="last_name"
+                  onChange={handleInputChange}
+                  value={values.last_name}
                   className="modal__input"
                 />
               </div>
@@ -89,6 +103,8 @@ export const Modal = ({ title, modalState, setModalState }) => {
                   placeholder={user.email}
                   type="text"
                   id="email"
+                  value={values.email}
+                  onChange={handleInputChange}
                   name="email"
                   className="modal__input"
                 />
@@ -100,6 +116,8 @@ export const Modal = ({ title, modalState, setModalState }) => {
                   type="text"
                   id="phone"
                   name="phone"
+                  onChange={handleInputChange}
+                  value={values.phone}
                   className="modal__input"
                 />
               </div>
