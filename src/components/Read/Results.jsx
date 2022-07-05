@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import "../../sass/layout/readResults.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { Modal } from "../Modal";
 
 export const Results = ({ kindOfRequest, users }) => {
-  const { user } = useSelector((state) => state);
-  const [editable, setEditable] = useState(false);
-
-  const handleEdit = () => {
-   
+  const [modalState, setModalState] = useState(false);
+  const [user, setuser] = useState([]);
+  const handleEdit = (e, user) => {
+    setModalState(true);
+    setuser(user);
   };
+  
   return (
     <>
+        <Modal
+          title={"Edit"}
+          modalState={modalState}
+          setModalState={setModalState}
+          user={user}
+        />
       <table className={`${kindOfRequest}Card__table`}>
         <tbody>
           <tr>
@@ -38,7 +45,7 @@ export const Results = ({ kindOfRequest, users }) => {
                       <td>{user.birthday}</td>
                       {kindOfRequest === "update" ? (
                         <td
-                          onClick={handleEdit}
+                          onClick={(e) => handleEdit(e, user)}
                           className="updateCard__button-edit"
                         >
                           edit

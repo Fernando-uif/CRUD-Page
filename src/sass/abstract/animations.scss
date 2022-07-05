@@ -3,3 +3,8 @@
         opacity: 1;
     }
 }
+@keyframes showOut{
+    to{
+        opacity: 0;
+    }
+}

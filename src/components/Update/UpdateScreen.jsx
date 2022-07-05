@@ -1,13 +1,12 @@
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 
-import { justNumbers } from "../../helpers/justNumbers";
-import { emailChecker } from "../../helpers/reviewEmail";
-import { useForm } from "../../hooks/useForm";
 import "../../sass/layout/update.scss";
-import { Results } from "../Read/Results";
+import { emailChecker } from "../../helpers/reviewEmail";
+import { justNumbers } from "../../helpers/justNumbers";
 import { readUser, readUsers } from "../../reducers/thunks";
-
+import { Results } from "../Read/Results";
+import { useForm } from "../../hooks/useForm";
 export const UpdateScreen = () => {
   const dispatch = useDispatch();
   const {
@@ -40,7 +39,9 @@ export const UpdateScreen = () => {
       : dispatch(readUser(values));
   };
   return (
+
     <div className="updateCard">
+      
       <h1>update</h1>
       <section className="updateCard__secondCard">
         <div>

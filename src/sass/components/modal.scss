@@ -1,0 +1,58 @@
+@import "../abstract/variables.scss";
+@import "../abstract/generalMixin.scss";
+@import '../abstract/animations.scss';
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity:0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__fade-in{
+    animation: showIn .3s ease forwards;
+  }
+  &__content {
+    width: 50rem;
+    min-height: 10rem;
+    background: #fff;
+    position: relative;
+    border-radius: 0.5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0rem 0.7rem 2.9rem 0rem;
+    padding: 2rem;
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    position: relative;
+    &-text {
+      font-size: 2rem;
+    }
+    & > span {
+      display: block;
+    }
+  }
+  &__closeButton {
+    // width:3rem;
+    // height:3rem;
+    cursor: pointer;
+    color: darken($tertiary-color, 50);
+    display: inline-block;
+    font-size: 1.5rem;
+  }
+  &__input {
+    @include inputText;
+    margin-bottom: 2rem;
+  }
+  &__button {
+    text-align: center;
+    &-save {
+      @include button;
+    }
+  }
+}
