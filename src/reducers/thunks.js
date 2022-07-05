@@ -1,3 +1,5 @@
+import { ACTIONS } from "../actions/actions";
+
 const createUser = (userInfo = {}) => {
   return async () => {
     await fetch(`http://localhost:8000/api/usuarios/`, {
@@ -22,7 +24,37 @@ const updateUser = (userInfo = {}) => {
   };
 };
 
-export { 
-    createUser, 
-    updateUser,
- };
+const readUsers = (userInfo = {}) => {
+  console.log('Entrando a users');
+  return async (dispatch) => {
+    const answer = await fetch(`http://localhost:8000/api/usuarios/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const users = await answer.json();
+    dispatch({ type: ACTIONS.READ_USER, payload: users });
+  };
+};
+const readUser = (userInfo = {}) => {
+  return async (dispatch) => {
+    const answer = await fetch(`http://localhost:8000/api/usuarios/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const users = await answer.json();
+    const user = users.filter(
+      (user) =>
+        user.user_id === +userInfo.user_id ||
+        user.user_name === userInfo.user_name ||
+        user.email === userInfo.email ||
+        user.phone === userInfo.phone
+    );
+    dispatch({ type: ACTIONS.READ_USER, payload: user });
+  };
+};
+
+export { createUser, updateUser, readUser, readUsers };

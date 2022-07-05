@@ -9,7 +9,9 @@ export const userReducer = (state = initialState, action) => {
     case ACTIONS.ADD_USER:
       return {};
     case ACTIONS.READ_USER:
-      return {};
+      return {
+        users: action.payload,
+      };
     case ACTIONS.UPDATE_USER:
       return {};
     case ACTIONS.DELETE_USER:
@@ -18,4 +20,3 @@ export const userReducer = (state = initialState, action) => {
       return { state };
   }
 };
-

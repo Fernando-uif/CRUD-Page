@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 import "../../sass/layout/readResults.scss";
@@ -6,16 +5,27 @@ import { justNumbers } from "../../helpers/justNumbers";
 import { Results } from "./Results";
 import { useForm } from "../../hooks/useForm";
 import { emailChecker } from "../../helpers/reviewEmail";
+import { useDispatch, useSelector } from "react-redux";
+import { readUser, readUsers } from "../../reducers/thunks";
 
 export const ReadScreen = () => {
+  const dispatch = useDispatch();
+  const {
+    user: { users },
+  } = useSelector((state) => state);
+
   const [values, handleInputChange, handleInputReset, reset] = useForm({
-    id: "",
-    name: "",
+    user_id: "",
+    user_name: "",
     email: "",
     phone: "",
   });
   const handleRequest = () => {
-    console.log("handle Request");
+    const { user_id, user_name, email, phone } = values;
+
+    user_id === "" && user_name === "" && email === "" && phone === ""
+      ? dispatch(readUsers())
+      : dispatch(readUser(values));
   };
   const reviewEmail = (e) => {
     !emailChecker.test(e.target.value)
@@ -38,9 +48,9 @@ export const ReadScreen = () => {
             <div>
               <label htmlFor="readCard-id">id</label>
               <input
-                name="id"
+                name="user_id"
                 onChange={handleInputChange}
-                value={values.id}
+                value={values.user_id}
                 onKeyPress={justNumbers}
                 autoComplete="off"
                 className="readCard__input"
@@ -53,6 +63,9 @@ export const ReadScreen = () => {
               <label htmlFor="readCard-search">name</label>
               <input
                 autoComplete="off"
+                name="user_name"
+                onChange={handleInputChange}
+                value={values.user_name}
                 className="readCard__input"
                 id="readCard-search"
                 type="search"
@@ -75,6 +88,9 @@ export const ReadScreen = () => {
               <label htmlFor="readCard-phone">Phone</label>
               <input
                 autoComplete="off"
+                value={values.phone}
+                name="phone"
+                onChange={handleInputChange}
                 className="readCard__input"
                 id="readCard-phone"
                 type="phone"
@@ -87,7 +103,7 @@ export const ReadScreen = () => {
           </div>
         </div>
         <div className="readCard__results">
-          <Results kindOfRequest="read" />
+          <Results kindOfRequest="read" users={users} />
         </div>
       </section>
     </div>
