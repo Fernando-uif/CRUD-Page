@@ -1,14 +1,42 @@
 import { useForm } from "../hooks/useForm";
 import "../sass/components/modal.scss";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../reducers/thunks";
+import Swal from "sweetalert2";
 
 export const Modal = ({ title, modalState, setModalState }) => {
+  const dispatch = useDispatch();
   const {
     user: { user },
   } = useSelector((state) => state);
 
-  const handleSaveUser = () => {};
+  const [values, handleInputChange, handleInputReset, reset] = useForm({
+    user_name: "",
+    email: "",
+    phone: "",
+    last_name: "",
+  });
+  const { user_name, email, phone, last_name } = values;
+
+  const handleSaveUser = () => {
+    user_name === "" && email === "" && phone === "" && last_name === ""
+      ? Swal.fire({
+          title: "Error",
+          text: "Please, fill at least one field",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#726D84",
+        })
+      : dispatch(updateUser({ ...values }));
+  };
+
+
+  const setModalFalse = () => {
+    setModalState(false);
+    reset();
+  };
+
   return (
     <>
       {modalState && (
@@ -17,7 +45,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
             <div className="modal__header">
               <span className="modal__header-text">{title}</span>
               <span
-                onClick={() => setModalState(false)}
+                onClick={() => setModalFalse()}
                 className="modal__closeButton"
               >
                 <svg
@@ -40,6 +68,8 @@ export const Modal = ({ title, modalState, setModalState }) => {
                   name="user_name"
                   placeholder={user.user_name}
                   id="name"
+                  onChange={handleInputChange}
+                  value={values.user_name}
                   className="modal__input"
                 />
               </div>

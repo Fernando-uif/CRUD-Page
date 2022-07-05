@@ -9,12 +9,11 @@ import { Results } from "../Read/Results";
 import { useForm } from "../../hooks/useForm";
 
 export const UpdateScreen = () => {
-  
+
   const dispatch = useDispatch();
   const {
     user: { users },
   } = useSelector((state) => state);
-console.log(users,'Tenemos los users');
 
   const [values, handleInputChange, handleInputReset, reset] = useForm({
     user_id: "",

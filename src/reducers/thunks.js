@@ -13,14 +13,16 @@ const createUser = (userInfo = {}) => {
 };
 
 const updateUser = (userInfo = {}) => {
+  console.log(userInfo,'Tenemos la informacion desde el updateuser');
   return async () => {
-    await fetch(`http://localhost:8000/api/usuarios/${userInfo.id}/`, {
+    const respuesta = await fetch(`http://localhost:8000/api/usuarios/${userInfo.user_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userInfo),
     });
+    console.log(await respuesta.json(),'Tenemos respuesta desde updateuser');
   };
 };
 

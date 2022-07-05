@@ -5,7 +5,6 @@ import "../../sass/layout/readResults.scss";
 import { Modal } from "../Modal";
 
 export const Results = ({ kindOfRequest, users }) => {
-  console.log(users,'Users de results');
   
   const [modalState, setModalState] = useState(false);
   const dispatch = useDispatch();
