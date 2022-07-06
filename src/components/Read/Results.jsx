@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import "../../sass/layout/readResults.scss";
 import { ACTIONS } from "../../actions/actions";
 import { Modal } from "../Modal";
-import { deleteUser } from "../../reducers/thunks";
+import { deleteUser, readUsers } from "../../reducers/thunks";
 
 export const Results = ({ kindOfRequest, users }) => {
   const [modalState, setModalState] = useState(false);
@@ -27,6 +27,7 @@ export const Results = ({ kindOfRequest, users }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteUser(user));
+        dispatch(readUsers());
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });

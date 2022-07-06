@@ -1,7 +1,7 @@
 import { useForm } from "../hooks/useForm";
 import "../sass/components/modal.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../reducers/thunks";
+import { readUsers, updateUser } from "../reducers/thunks";
 import Swal from "sweetalert2";
 
 export const Modal = ({ title, modalState, setModalState }) => {
@@ -9,7 +9,6 @@ export const Modal = ({ title, modalState, setModalState }) => {
   const {
     user: { user },
   } = useSelector((state) => state);
-
   const [values, handleInputChange, , reset] = useForm({
     user_name: "",
     email: "",
@@ -26,20 +25,32 @@ export const Modal = ({ title, modalState, setModalState }) => {
       }
     }
 
-    user_name === "" && email === "" && phone === "" && last_name === ""
-      ? Swal.fire({
-          title: "Error",
-          text: "Please, fill at least one field",
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#726D84",
+    if (user_name === "" && email === "" && phone === "" && last_name === "") {
+      Swal.fire({
+        title: "Error",
+        text: "Please, fill at least one field",
+        icon: "error",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#726D84",
+      });
+    } else {
+      dispatch(
+        updateUser({
+          ...user,
+          ...obj,
         })
-      : dispatch(
-          updateUser({
-            ...user,
-            ...obj,
-          })
-        );
+      );
+      Swal.fire({
+        title: "The user has been updated",
+        text: `The user ${user.user_name} has been updated`,
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#726D84",
+      });
+      setModalState(false);
+      reset();
+      dispatch(readUsers());
+    }
   };
 
   const setModalFalse = () => {
