@@ -8,8 +8,10 @@ import { Modal } from "../Modal";
 import { deleteUser, readUsers } from "../../reducers/thunks";
 
 export const Results = ({ kindOfRequest, users }) => {
-  const [modalState, setModalState] = useState(false);
   const dispatch = useDispatch();
+  const { isResultsActive } = useSelector((state) => state.user);
+
+  const [modalState, setModalState] = useState(false);
 
   const handleEdit = (e, user) => {
     setModalState(true);
@@ -21,13 +23,13 @@ export const Results = ({ kindOfRequest, users }) => {
       text: `You will delete ${user.user_name}`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#726D84",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteUser(user));
-        dispatch(readUsers());
+        dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: false });
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
@@ -54,7 +56,7 @@ export const Results = ({ kindOfRequest, users }) => {
               <th>Delete</th>
             ) : null}
           </tr>
-          {users ? (
+          {users && isResultsActive ? (
             React.Children.toArray(
               users.map((user, i) => {
                 return (

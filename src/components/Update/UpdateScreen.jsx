@@ -37,7 +37,7 @@ export const UpdateScreen = () => {
     const { user_id, user_name, email, phone } = values;
 
     user_id === "" && user_name === "" && email === "" && phone === ""
-      ? dispatch(readUsers())
+      ? dispatch(readUsers()) && dispatch({ type: "ACTIVE_RESULTS", payload: true })
       : dispatch(readUser(values));
   };
   return (

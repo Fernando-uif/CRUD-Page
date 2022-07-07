@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { readUser, readUsers } from "../../reducers/thunks";
 
 export const DeleteScreen = () => {
-
   const dispatch = useDispatch();
   const {
     user: { users },
@@ -37,7 +36,8 @@ export const DeleteScreen = () => {
   const handleRequest = () => {
     const { user_id, user_name, email, phone } = values;
     user_id === "" && user_name === "" && email === "" && phone === ""
-      ? dispatch(readUsers())
+      ? dispatch(readUsers()) &&
+        dispatch({ type: "ACTIVE_RESULTS", payload: true })
       : dispatch(readUser(values));
   };
   return (
@@ -104,7 +104,7 @@ export const DeleteScreen = () => {
           </div>
         </div>
         <div className="deleteCard__results">
-          <Results kindOfRequest="delete" users={users}/>
+          <Results kindOfRequest="delete" users={users} />
         </div>
       </section>
     </div>

@@ -3,12 +3,14 @@ import "../sass/components/modal.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { readUsers, updateUser } from "../reducers/thunks";
 import Swal from "sweetalert2";
+import { ACTIONS } from "../actions/actions";
 
 export const Modal = ({ title, modalState, setModalState }) => {
   const dispatch = useDispatch();
   const {
     user: { user },
   } = useSelector((state) => state);
+
   const [values, handleInputChange, , reset] = useForm({
     user_name: "",
     email: "",
@@ -49,12 +51,14 @@ export const Modal = ({ title, modalState, setModalState }) => {
       });
       setModalState(false);
       reset();
-      dispatch(readUsers());
+      // dispatch(readUsers());
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: false });
     }
   };
 
   const setModalFalse = () => {
     setModalState(false);
+
     reset();
   };
 

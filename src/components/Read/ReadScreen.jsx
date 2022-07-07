@@ -7,6 +7,7 @@ import { useForm } from "../../hooks/useForm";
 import { emailChecker } from "../../helpers/reviewEmail";
 import { useDispatch, useSelector } from "react-redux";
 import { readUser, readUsers } from "../../reducers/thunks";
+import { ACTIONS } from "../../actions/actions";
 
 export const ReadScreen = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,8 @@ export const ReadScreen = () => {
     const { user_id, user_name, email, phone } = values;
 
     user_id === "" && user_name === "" && email === "" && phone === ""
-      ? dispatch(readUsers())
+      ? dispatch(readUsers()) &&
+        dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true })
       : dispatch(readUser(values));
   };
   const reviewEmail = (e) => {
