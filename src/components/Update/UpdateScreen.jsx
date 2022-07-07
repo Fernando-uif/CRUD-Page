@@ -34,6 +34,8 @@ export const UpdateScreen = () => {
   };
 
   const handleRequest = () => {
+    //TODO Verificar la peticion con lo de la base de datos 
+    //TODO Revisar el nuevo useReducer que agregue de un solo usuario porque hay para varios igual para delete
     const { user_id, user_name, email, phone } = values;
 
     user_id === "" && user_name === "" && email === "" && phone === ""

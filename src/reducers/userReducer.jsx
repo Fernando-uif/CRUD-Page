@@ -9,6 +9,14 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.READ_USER:
+      console.log(action.payload,'Tenemos al usuario');
+      
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case ACTIONS.READ_USERS:
+      
       return {
         ...state,
         users: action.payload,

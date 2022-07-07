@@ -1,7 +1,7 @@
 import { useForm } from "../hooks/useForm";
 import "../sass/components/modal.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { readUsers, updateUser } from "../reducers/thunks";
+import { readUser, readUsers, updateUser } from "../reducers/thunks";
 import Swal from "sweetalert2";
 import { ACTIONS } from "../actions/actions";
 
@@ -42,6 +42,10 @@ export const Modal = ({ title, modalState, setModalState }) => {
           ...obj,
         })
       );
+      setModalState(false);
+      reset();
+      dispatch(readUsers());
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: false });
       Swal.fire({
         title: "The user has been updated",
         text: `The user ${user.user_name} has been updated`,
@@ -49,10 +53,6 @@ export const Modal = ({ title, modalState, setModalState }) => {
         confirmButtonText: "Ok",
         confirmButtonColor: "#726D84",
       });
-      setModalState(false);
-      reset();
-      // dispatch(readUsers());
-      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: false });
     }
   };
 

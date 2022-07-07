@@ -13,6 +13,7 @@ const createUser = (userInfo = {}) => {
 };
 
 const updateUser = (userInfo = {}) => {
+  
   return async () => {
     await fetch(`http://localhost:8000/api/usuarios/${userInfo.user_id}`, {
       method: "PUT",
@@ -35,6 +36,7 @@ const deleteUser = (userInfo = {}) => {
 };
 
 const readUsers = () => {
+  console.log('Entrando a readusers');
   return async (dispatch) => {
     const answer = await fetch(`http://localhost:8000/api/usuarios/`, {
       method: "GET",
@@ -62,6 +64,7 @@ const readUser = (userInfo = {}) => {
         user.email === userInfo.email ||
         user.phone === userInfo.phone
     );
+    console.log(user, 'user');
     dispatch({ type: ACTIONS.READ_USER, payload: user });
   };
 };

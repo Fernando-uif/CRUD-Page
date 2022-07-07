@@ -7,9 +7,11 @@ import { ACTIONS } from "../../actions/actions";
 import { Modal } from "../Modal";
 import { deleteUser, readUsers } from "../../reducers/thunks";
 
-export const Results = ({ kindOfRequest, users }) => {
+export const Results = ({ kindOfRequest, usuario }) => {
   const dispatch = useDispatch();
   const { isResultsActive } = useSelector((state) => state.user);
+  const respuesta = useSelector((state) => state);
+  console.log(respuesta, "respuesta use selector");
 
   const [modalState, setModalState] = useState(false);
 
@@ -56,9 +58,9 @@ export const Results = ({ kindOfRequest, users }) => {
               <th>Delete</th>
             ) : null}
           </tr>
-          {users && isResultsActive ? (
+          {usuario && isResultsActive ? (
             React.Children.toArray(
-              users.map((user, i) => {
+              usuario.map((user, i) => {
                 return (
                   <>
                     <tr>
