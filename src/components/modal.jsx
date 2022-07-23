@@ -26,7 +26,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
         obj = { ...obj, [i]: values[i] };
       }
     }
-
+    
     if (user_name === "" && email === "" && phone === "" && last_name === "") {
       Swal.fire({
         title: "Error",
@@ -38,7 +38,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
     } else {
       dispatch(
         updateUser({
-          ...user,
+          ...user[0],
           ...obj,
         })
       );
@@ -91,7 +91,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
                 <input
                   type="text"
                   name="user_name"
-                  placeholder={user.user_name}
+                  placeholder={user[0].user_name}
                   id="name"
                   onChange={handleInputChange}
                   value={values.user_name}
@@ -101,7 +101,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
               <div>
                 <label htmlFor="last_name">Last Name</label>
                 <input
-                  placeholder={user.last_name}
+                  placeholder={user[0].last_name}
                   type="text"
                   name="last_name"
                   id="last_name"
@@ -113,7 +113,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
               <div>
                 <label htmlFor="email">Email</label>
                 <input
-                  placeholder={user.email}
+                  placeholder={user[0].email}
                   type="text"
                   id="email"
                   value={values.email}
@@ -125,7 +125,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
               <div>
                 <label htmlFor="phone">Phone</label>
                 <input
-                  placeholder={user.phone}
+                  placeholder={user[0].phone}
                   type="text"
                   id="phone"
                   name="phone"

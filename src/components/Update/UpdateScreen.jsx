@@ -7,12 +7,13 @@ import { justNumbers } from "../../helpers/justNumbers";
 import { readUser, readUsers } from "../../reducers/thunks";
 import { Results } from "../Read/Results";
 import { useForm } from "../../hooks/useForm";
+import { ACTIONS } from "../../actions/actions";
 
 export const UpdateScreen = () => {
 
   const dispatch = useDispatch();
   const {
-    user: { users },
+    user: { user},
   } = useSelector((state) => state);
 
   const [values, handleInputChange, handleInputReset, reset] = useForm({
@@ -39,8 +40,8 @@ export const UpdateScreen = () => {
     const { user_id, user_name, email, phone } = values;
 
     user_id === "" && user_name === "" && email === "" && phone === ""
-      ? dispatch(readUsers()) && dispatch({ type: "ACTIVE_RESULTS", payload: true })
-      : dispatch(readUser(values));
+      ? dispatch(readUsers()) && dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true })
+      : dispatch(readUser(values)) && dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
   };
   return (
 
@@ -109,7 +110,7 @@ export const UpdateScreen = () => {
           </div>
         </div>
         <div className="updateCard__results">
-          <Results kindOfRequest="update" users={users} />
+          <Results kindOfRequest="update" usuario={user} />
         </div>
       </section>
     </div>

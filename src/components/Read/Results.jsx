@@ -8,16 +8,18 @@ import { Modal } from "../Modal";
 import { deleteUser, readUsers } from "../../reducers/thunks";
 
 export const Results = ({ kindOfRequest, usuario }) => {
+  
   const dispatch = useDispatch();
   const { isResultsActive } = useSelector((state) => state.user);
   const respuesta = useSelector((state) => state);
-  console.log(respuesta, "respuesta use selector");
-
+//TODO Verificar que pasa con la edicion de usuario
   const [modalState, setModalState] = useState(false);
-
+  
   const handleEdit = (e, user) => {
+    // console.log(user);
+    
     setModalState(true);
-    dispatch({ type: ACTIONS.UPDATE_USER, payload: user });
+    dispatch({ type: ACTIONS.UPDATE_USER, payload: [user] });
   };
   const handleDelete = (e, user) => {
     Swal.fire({
@@ -58,7 +60,7 @@ export const Results = ({ kindOfRequest, usuario }) => {
               <th>Delete</th>
             ) : null}
           </tr>
-          {usuario && isResultsActive ? (
+          {usuario  ? (
             React.Children.toArray(
               usuario.map((user, i) => {
                 return (
