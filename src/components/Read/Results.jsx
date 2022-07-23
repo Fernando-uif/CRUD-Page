@@ -8,19 +8,17 @@ import { Modal } from "../Modal";
 import { deleteUser, readUsers } from "../../reducers/thunks";
 
 export const Results = ({ kindOfRequest, usuario }) => {
-  
+  console.log(usuario, "Como llega el usuario a results");
+  const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
-  const { isResultsActive } = useSelector((state) => state.user);
-  const respuesta = useSelector((state) => state);
-//TODO Verificar que pasa con la edicion de usuario
   const [modalState, setModalState] = useState(false);
-  
+
   const handleEdit = (e, user) => {
-    // console.log(user);
-    
+    setSelectedUser([user]);
     setModalState(true);
-    dispatch({ type: ACTIONS.UPDATE_USER, payload: [user] });
   };
+  console.log(selectedUser, "Desde el edit");
+
   const handleDelete = (e, user) => {
     Swal.fire({
       title: "Are you sure?",
@@ -34,16 +32,18 @@ export const Results = ({ kindOfRequest, usuario }) => {
       if (result.isConfirmed) {
         dispatch(deleteUser(user));
         dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: false });
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Deleted!", "Your user has been deleted.", "success");
       }
     });
   };
+
   return (
     <>
       <Modal
         title={"Edit"}
         modalState={modalState}
         setModalState={setModalState}
+        selectedUser={selectedUser}
       />
       <table className={`${kindOfRequest}Card__table`}>
         <tbody>
@@ -60,7 +60,7 @@ export const Results = ({ kindOfRequest, usuario }) => {
               <th>Delete</th>
             ) : null}
           </tr>
-          {usuario  ? (
+          {usuario ? (
             React.Children.toArray(
               usuario.map((user, i) => {
                 return (

@@ -5,11 +5,15 @@ import { readUser, readUsers, updateUser } from "../reducers/thunks";
 import Swal from "sweetalert2";
 import { ACTIONS } from "../actions/actions";
 
-export const Modal = ({ title, modalState, setModalState }) => {
+export const Modal = ({
+  title,
+  modalState,
+  setModalState,
+  selectedUser: user,
+}) => {
   const dispatch = useDispatch();
-  const {
-    user: { user },
-  } = useSelector((state) => state);
+
+  console.log(user, "Tenemos al usuario seleccionado");
 
   const [values, handleInputChange, , reset] = useForm({
     user_name: "",
@@ -26,7 +30,7 @@ export const Modal = ({ title, modalState, setModalState }) => {
         obj = { ...obj, [i]: values[i] };
       }
     }
-    
+
     if (user_name === "" && email === "" && phone === "" && last_name === "") {
       Swal.fire({
         title: "Error",

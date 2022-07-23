@@ -1,13 +1,13 @@
-import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 import "../../sass/layout/update.scss";
+import { ACTIONS } from "../../actions/actions";
 import { emailChecker } from "../../helpers/reviewEmail";
 import { justNumbers } from "../../helpers/justNumbers";
 import { readUser, readUsers } from "../../reducers/thunks";
 import { Results } from "../Read/Results";
 import { useForm } from "../../hooks/useForm";
-import { ACTIONS } from "../../actions/actions";
 
 export const UpdateScreen = () => {
 
@@ -16,6 +16,12 @@ export const UpdateScreen = () => {
     user: { user},
   } = useSelector((state) => state);
 
+  const respuesta = useSelector((state) => state);
+  console.log(respuesta);
+  
+  // const first = useRef('second')
+  // console.log(first);
+  
   const [values, handleInputChange, handleInputReset, reset] = useForm({
     user_id: "",
     user_name: "",
