@@ -8,11 +8,16 @@ import { emailChecker } from "../../helpers/reviewEmail";
 import { useDispatch, useSelector } from "react-redux";
 import { readUser, readUsers } from "../../reducers/thunks";
 import { ACTIONS } from "../../actions/actions";
+import { useEffect, useState } from "react";
 
 export const ReadScreen = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(readUsers());
+  }, []);
+
   const {
-    user: { user },
+    user: { users, user },
   } = useSelector((state) => state);
 
   const [values, handleInputChange, handleInputReset, reset] = useForm({
@@ -21,13 +26,19 @@ export const ReadScreen = () => {
     email: "",
     phone: "",
   });
-  const handleRequest = () => {
+  
+  const handleRequest = async () => {
     const { user_id, user_name, email, phone } = values;
 
-    user_id === "" && user_name === "" && email === "" && phone === ""
-      ? dispatch(readUsers()) &&
-        dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true })
-      : dispatch(readUser(values)) && dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+    if ((user_id === '' && user_name === '' && email === '' && phone === '')) {
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+      dispatch(readUsers());
+      setPaintedUsers(users);
+    } else {
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+      dispatch(readUser(values));
+      setPaintedUsers(user);
+    }
   };
   const reviewEmail = (e) => {
     !emailChecker.test(e.target.value)
@@ -105,7 +116,7 @@ export const ReadScreen = () => {
           </div>
         </div>
         <div className="readCard__results">
-          <Results kindOfRequest="read" usuario={user} />
+          <Results kindOfRequest="read" usuario={user || users} />
         </div>
       </section>
     </div>

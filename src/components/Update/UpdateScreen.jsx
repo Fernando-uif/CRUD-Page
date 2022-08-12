@@ -8,26 +8,27 @@ import { justNumbers } from "../../helpers/justNumbers";
 import { readUser, readUsers } from "../../reducers/thunks";
 import { Results } from "../Read/Results";
 import { useForm } from "../../hooks/useForm";
+import { useState, useEffect } from "react";
 
 export const UpdateScreen = () => {
-
   const dispatch = useDispatch();
   const {
-    user: { user},
+    user: { users, user },
   } = useSelector((state) => state);
 
-  const respuesta = useSelector((state) => state);
-  console.log(respuesta);
-  
-  // const first = useRef('second')
-  // console.log(first);
-  
+  useEffect(() => {
+    dispatch(readUsers());
+  }, []);
+
   const [values, handleInputChange, handleInputReset, reset] = useForm({
     user_id: "",
     user_name: "",
     email: "",
     phone: "",
   });
+
+  const { user_id, user_name, email, phone } = values;
+
   const reviewEmail = (e) => {
     !emailChecker.test(e.target.value)
       ? Swal.fire({
@@ -40,19 +41,21 @@ export const UpdateScreen = () => {
       : null;
   };
 
-  const handleRequest = () => {
-    //TODO Verificar la peticion con lo de la base de datos 
-    //TODO Revisar el nuevo useReducer que agregue de un solo usuario porque hay para varios igual para delete
+  const handleRequest = async () => {
     const { user_id, user_name, email, phone } = values;
 
-    user_id === "" && user_name === "" && email === "" && phone === ""
-      ? dispatch(readUsers()) && dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true })
-      : dispatch(readUser(values)) && dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+    if (user_id === "" && user_name === "" && email === "" && phone === "") {
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+      dispatch(readUsers());
+    } else {
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+      dispatch(readUser(values));
+    }
+    setPaintedUsers(users);
   };
-  return (
 
+  return (
     <div className="updateCard">
-      
       <h1>update</h1>
       <section className="updateCard__secondCard">
         <div>
@@ -116,7 +119,7 @@ export const UpdateScreen = () => {
           </div>
         </div>
         <div className="updateCard__results">
-          <Results kindOfRequest="update" usuario={user} />
+          <Results kindOfRequest="update" usuario={user || users} />
         </div>
       </section>
     </div>

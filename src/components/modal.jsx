@@ -13,8 +13,6 @@ export const Modal = ({
 }) => {
   const dispatch = useDispatch();
 
-  console.log(user, "Tenemos al usuario seleccionado");
-
   const [values, handleInputChange, , reset] = useForm({
     user_name: "",
     email: "",

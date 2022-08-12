@@ -8,7 +8,8 @@ import { Modal } from "../Modal";
 import { deleteUser, readUsers } from "../../reducers/thunks";
 
 export const Results = ({ kindOfRequest, usuario }) => {
-  console.log(usuario, "Como llega el usuario a results");
+
+  
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
   const [modalState, setModalState] = useState(false);
@@ -17,7 +18,6 @@ export const Results = ({ kindOfRequest, usuario }) => {
     setSelectedUser([user]);
     setModalState(true);
   };
-  console.log(selectedUser, "Desde el edit");
 
   const handleDelete = (e, user) => {
     Swal.fire({

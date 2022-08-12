@@ -9,23 +9,17 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.READ_USER:
+      
+      console.log(action.payload,'lo que tenemos del payload');
       return {
-        ...state,
+        
         user: action.payload,
       };
-    case ACTIONS.READ_USERS:
+      case ACTIONS.READ_USERS:
+        console.log(action.payload,'lo que tenemos del payload2');
       return {
-        ...state,
+        
         users: action.payload,
-      };
-    case ACTIONS.UPDATE_USER:
-      //TODO Estamos afectando al state entonces remueve al los elementos que tenemos en el state
-      console.log({ ...state, user: action.payload[0] }, "lo que se regresa");
-      console.log(action.payload , "tenemos el payload");
-
-      return {
-        ...state,
-        user: action.payload,
       };
 
     case ACTIONS.ACTIVE_RESULTS:
