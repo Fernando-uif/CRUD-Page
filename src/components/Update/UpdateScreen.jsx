@@ -27,7 +27,6 @@ export const UpdateScreen = () => {
     phone: "",
   });
 
-  const { user_id, user_name, email, phone } = values;
 
   const reviewEmail = (e) => {
     !emailChecker.test(e.target.value)
@@ -51,7 +50,6 @@ export const UpdateScreen = () => {
       dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
       dispatch(readUser(values));
     }
-    setPaintedUsers(users);
   };
 
   return (

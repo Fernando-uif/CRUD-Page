@@ -1,18 +1,23 @@
-import React from "react";
 import Swal from "sweetalert2";
 
 import "../../sass/layout/delete.scss";
+import { ACTIONS } from "../../actions/actions";
 import { emailChecker } from "../../helpers/reviewEmail";
 import { justNumbers } from "../../helpers/justNumbers";
 import { Results } from "../Read/Results";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { readUser, readUsers } from "../../reducers/thunks";
+import { useEffect } from "react";
 
 export const DeleteScreen = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(readUsers());
+  }, []);
+  
   const {
-    user: { users },
+    user: { users, user },
   } = useSelector((state) => state);
 
   const [values, handleInputChange, handleInputReset, reset] = useForm({
@@ -33,12 +38,17 @@ export const DeleteScreen = () => {
         }) && handleInputReset({ name: "email" })
       : null;
   };
-  const handleRequest = () => {
+
+  const handleRequest = async () => {
     const { user_id, user_name, email, phone } = values;
-    user_id === "" && user_name === "" && email === "" && phone === ""
-      ? dispatch(readUsers()) &&
-        dispatch({ type: "ACTIVE_RESULTS", payload: true })
-      : dispatch(readUser(values));
+
+    if (user_id === "" && user_name === "" && email === "" && phone === "") {
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+      dispatch(readUsers());
+    } else {
+      dispatch({ type: ACTIONS.ACTIVE_RESULTS, payload: true });
+      dispatch(readUser(values));
+    }
   };
   return (
     <div className="deleteCard">
@@ -104,7 +114,7 @@ export const DeleteScreen = () => {
           </div>
         </div>
         <div className="deleteCard__results">
-          <Results kindOfRequest="delete" users={users} />
+          <Results kindOfRequest="delete" usuario={users || user} />
         </div>
       </section>
     </div>

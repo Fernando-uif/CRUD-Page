@@ -1,14 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
 import "../../sass/layout/readResults.scss";
 import { ACTIONS } from "../../actions/actions";
 import { Modal } from "../Modal";
-import { deleteUser, readUsers } from "../../reducers/thunks";
+import { deleteUser } from "../../reducers/thunks";
 
 export const Results = ({ kindOfRequest, usuario }) => {
-
   
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
@@ -62,7 +61,7 @@ export const Results = ({ kindOfRequest, usuario }) => {
           </tr>
           {usuario ? (
             React.Children.toArray(
-              usuario.map((user, i) => {
+              usuario.map(( user ) => {
                 return (
                   <>
                     <tr>
