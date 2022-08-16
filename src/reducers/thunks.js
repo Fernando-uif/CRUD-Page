@@ -2,7 +2,7 @@ import { ACTIONS } from "../actions/actions";
 
 const createUser = (userInfo = {}) => {
   return async () => {
-    await fetch(`http://localhost:8000/api/usuarios/`, {
+    await fetch(`https://userapp-ferstxd.herokuapp.com/api/usuarios/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,7 +14,7 @@ const createUser = (userInfo = {}) => {
 
 const updateUser = (userInfo = {}) => {
   return async () => {
-    await fetch(`http://localhost:8000/api/usuarios/${userInfo.user_id}`, {
+    await fetch(`https://userapp-ferstxd.herokuapp.com/api/usuarios/${userInfo.user_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ const updateUser = (userInfo = {}) => {
 };
 const deleteUser = (userInfo = {}) => {
   return async () => {
-    await fetch(`http://localhost:8000/api/usuarios/${userInfo.user_id}`, {
+    await fetch(`https://userapp-ferstxd.herokuapp.com/api/usuarios/${userInfo.user_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const deleteUser = (userInfo = {}) => {
 const readUsers = () => {
   console.log('read users');
   return async (dispatch) => {
-    const answer = await fetch(`http://localhost:8000/api/usuarios/`, {
+    const answer = await fetch(`https://userapp-ferstxd.herokuapp.com/api/usuarios/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const readUsers = () => {
 const readUser = (userInfo = {}) => {
   console.log('Entrando a read user');
   return async (dispatch) => {
-    const answer = await fetch(`http://localhost:8000/api/usuarios/`, {
+    const answer = await fetch(`https://userapp-ferstxd.herokuapp.com/api/usuarios/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

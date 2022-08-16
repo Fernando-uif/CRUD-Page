@@ -24,6 +24,7 @@ export const CreateScreen = () => {
     const { user_name, email, password, phone } = values;
     if (user_name === "" || email === "" || password === "" || phone === "") {
       Swal.fire({
+        //TODO Cambiar a ingles el error
         title: "Error",
         text: "Todos los campos son obligatorios",
         icon: "error",

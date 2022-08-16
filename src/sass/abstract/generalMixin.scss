@@ -15,7 +15,6 @@
 }
 
 @mixin card($padding: 1.5rem) {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: $padding;
   margin-bottom: 5rem;
   background-color: lighten($tertiary-color, 15);
